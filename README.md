@@ -1,4 +1,8 @@
-# GGToolBox Script Market Launcher插件仓库
+# GGToolBox Script Market Launcher
+
+为 OIer 服务的脚本 [doge]
+
+---
 
 上传格式：
 
