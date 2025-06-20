@@ -54,8 +54,7 @@ exit
 ### 🆔 id.txt
 
 ```txt
-creator: lyf
-version: 1.0
+lyf 1.0
 ```
 
 ---
