@@ -16,6 +16,6 @@ pip install ttkbootstrap -i https://pypi.tuna.tsinghua.edu.cn/simple
 pip install openai -i https://pypi.tuna.tsinghua.edu.cn/simple
 pip install openai -i https://pypi.tuna.tsinghua.edu.cn/simple
 
-start python ./OI-Data-Bot-main/main.pyw
+start pythonw ./OI-Data-Bot-main/main.pyw
 
 exit
