@@ -1,6 +1,6 @@
 @echo off
 
-if exist "./OI-Data-Bot-main/main.py" goto skip
+if exist "./OI-Data-Bot-main/main.pyw" goto skip
 
 echo Downloading OI-Data-Bot-main
 powershell -Command "Start-BitsTransfer -Source 'https://j.1win.ggff.net/https://github.com/OI-liyifan202201/OI-Data-Bot/archive/refs/heads/main.zip' -Destination OI.zip"
@@ -16,6 +16,6 @@ pip install ttkbootstrap -i https://pypi.tuna.tsinghua.edu.cn/simple
 pip install openai -i https://pypi.tuna.tsinghua.edu.cn/simple
 pip install openai -i https://pypi.tuna.tsinghua.edu.cn/simple
 
-start python ./OI-Data-Bot-main/main.py
+start python ./OI-Data-Bot-main/main.pyw
 
 exit
