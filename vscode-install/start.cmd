@@ -122,18 +122,7 @@ start /wait /b powershell code --install-extension usernamehw.errorlens >nul 2>n
 explorer "%appdata%\..\Local\Programs\Microsoft VS Code\code.exe"
 ping -n 10 127.0.0.1 >nul
 taskkill /f /im code.exe >nul 2>nul
+powershell "[system.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms') | Out-Null;$balloon = New-Object System.Windows.Forms.NotifyIcon;$path = Get-Process -id $pid | Select-Object -ExpandProperty Path;$icon = [System.Drawing.Icon]::ExtractAssociatedIcon($path);$balloon.Icon = $icon;$balloon.BalloonTipIcon = 'Info';$balloon.BalloonTipText = 'You can use your vscode.';$balloon.BalloonTipTitle = 'VScode-install in gsml';$balloon.Visible = $true;$balloon.ShowBalloonTip(1)"
 
-:: Show balloon message
-powershell -Command ^
-"[system.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms') | Out-Null; ^
-$balloon = New-Object System.Windows.Forms.NotifyIcon; ^
-$path = Get-Process -id $pid | Select-Object -ExpandProperty Path; ^
-$icon = [System.Drawing.Icon]::ExtractAssociatedIcon($path); ^
-$balloon.Icon = $icon; ^
-$balloon.BalloonTipIcon = 'Info'; ^
-$balloon.BalloonTipText = 'VSCode C++ environment installation completed.'; ^
-$balloon.BalloonTipTitle = 'VSCode Auto Installer'; ^
-$balloon.Visible = $true; ^
-$balloon.ShowBalloonTip(3000)"
 
 explorer "%appdata%\..\Local\Programs\Microsoft VS Code\code.exe"
