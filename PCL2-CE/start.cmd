@@ -3,7 +3,7 @@
 if exist "./PCL2/Plain Craft Launcher.exe" goto skip
 
 echo Downloading PCL2
-powershell -Command "Start-BitsTransfer -Source 'https://j.1win.ggff.net/https://raw.githubusercontent.com/OI-liyifan202201/nbsmc-PCL2-in-GSML/refs/heads/main/nbsmc.zip' -Destination nbsmc.zip"
+powershell -Command "Start-BitsTransfer -Source 'https://gh.llkk.cc/https://raw.githubusercontent.com/OI-liyifan202201/nbsmc-PCL2-in-GSML/refs/heads/main/nbsmc.zip' -Destination nbsmc.zip"
 
 echo Done
 echo Unzipping
