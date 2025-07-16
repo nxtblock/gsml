@@ -123,6 +123,7 @@ explorer "%appdata%\..\Local\Programs\Microsoft VS Code\code.exe"
 ping -n 10 127.0.0.1 >nul
 taskkill /f /im code.exe >nul 2>nul
 powershell "[system.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms') | Out-Null;$balloon = New-Object System.Windows.Forms.NotifyIcon;$path = Get-Process -id $pid | Select-Object -ExpandProperty Path;$icon = [System.Drawing.Icon]::ExtractAssociatedIcon($path);$balloon.Icon = $icon;$balloon.BalloonTipIcon = 'Info';$balloon.BalloonTipText = 'You can use your vscode.';$balloon.BalloonTipTitle = 'VScode-install in gsml';$balloon.Visible = $true;$balloon.ShowBalloonTip(1)"
-
+pause
+exit
 
 explorer "%appdata%\..\Local\Programs\Microsoft VS Code\code.exe"
