@@ -38,7 +38,7 @@ if exist C:\VSc-cpp\insMinGW-ok.txt goto binstall
 echo [START] Downloading MinGW64...
 
 :download_mingw
-powershell -Command "Invoke-WebRequest -Uri 'https://j.1win.ggff.net/https://github.com/Github-liyifan202201/Github-liyifan202201/releases/download/v1.0/MinGW-64.zip' -OutFile 'MinGW.zip'"
+powershell -Command "Invoke-WebRequest -Uri 'https://gh.llkk.cc/https://github.com/Github-liyifan202201/Github-liyifan202201/releases/download/v1.0/MinGW-64.zip' -OutFile 'MinGW.zip'"
 if %errorlevel%==1 (
     echo [ERROR] MinGW download failed. Retrying...
     goto download_mingw
