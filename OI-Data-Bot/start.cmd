@@ -3,7 +3,7 @@
 if exist "./OI-Data-Bot-main/main.pyw" goto skip
 
 echo Downloading OI-Data-Bot-main
-powershell -Command "Start-BitsTransfer -Source 'https://github.akams.cn/https://github.com/OI-liyifan202201/OI-Data-Bot/archive/refs/heads/main.zip' -Destination OI.zip"
+powershell -Command "Start-BitsTransfer -Source 'https://git.ppp.ac.cn/https://github.com/OI-liyifan202201/OI-Data-Bot/archive/refs/heads/main.zip' -Destination OI.zip"
 
 echo Done
 echo Unzipping
