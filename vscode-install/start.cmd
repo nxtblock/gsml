@@ -1,65 +1,81 @@
 @echo off
+chcp 65001 >nul
 cls
 
-echo [INFO] VSCode C++ Auto Setup Script
-echo Developed by liyifan202201
-echo ----------------------------------
+:: 清屏并显示标题
+echo ========================================
+echo    VSCode C++ 自动安装脚本
+echo         开发者：liyifan202201
+echo ========================================
+echo.
 
-:: Create working directory if not exists
+:: 创建工作目录
 md C:\VSc-cpp >nul 2>nul
 
-:: VSCode installation
+:: VSCode安装检查
 if exist C:\VSc-cpp\install-ok.txt goto ainstall
 
-echo [START] Downloading Visual Studio Code...
+echo [开始] 正在下载 Visual Studio Code...
+echo.
 
 :download_vscode
 powershell -Command "Invoke-WebRequest -Uri 'https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user' -OutFile 'VSC.exe'"
 if %errorlevel%==1 (
-    echo [ERROR] VSCode download failed. Retrying...
+    echo [错误] VSCode下载失败，正在重试...
     goto download_vscode
 )
 
-echo [OK] Downloaded VSCode.
-echo [START] Installing VSCode silently...
+echo [完成] 已成功下载VSCode
+echo [开始] 正在静默安装VSCode...
+echo.
 
 start /wait VSC.exe /VERYSILENT /SP-
 del VSC.exe
 taskkill /f /im code.exe >nul 2>nul
 
-echo [OK] VSCode installed successfully.
+echo [完成] VSCode安装成功
+echo [提示] 已创建安装标识文件
 echo IAKIOI >> C:\VSc-cpp\install-ok.txt
+echo.
 
 :ainstall
 
-:: MinGW installation
+:: MinGW安装检查
 if exist C:\VSc-cpp\insMinGW-ok.txt goto binstall
 
-echo [START] Downloading MinGW64...
+echo [开始] 正在下载 MinGW64...
+echo.
 
 :download_mingw
-powershell -Command "Invoke-WebRequest -Uri 'https://git.ppp.ac.cn/https://github.com/OI-liyifan202201/OI-liyifan202201/releases/download/v1.0/MinGW-64.zip' -OutFile 'MinGW.zip'"
+powershell -Command "Invoke-WebRequest -Uri '  https://git.ppp.ac.cn/https  ://github.com/OI-liyifan202201/OI-liyifan202201/releases/download/v1.0/MinGW-64.zip' -OutFile 'MinGW.zip'"
 if %errorlevel%==1 (
-    echo [ERROR] MinGW download failed. Retrying...
+    echo [错误] MinGW下载失败，正在重试...
     goto download_mingw
 )
 
-echo [OK] Downloaded MinGW.
-echo [START] Extracting MinGW...
+echo [完成] 已成功下载MinGW
+echo [开始] 正在解压MinGW...
+echo.
+
 powershell -Command "Expand-Archive -Path 'MinGW.zip' -DestinationPath 'C:\VSc-cpp\MinGW\'"
-echo [OK] Extracted MinGW.
+echo [完成] MinGW解压完成
+echo [提示] 已创建MinGW安装标识文件
 echo IAKIOI >> C:\VSc-cpp\insMinGW-ok.txt
 del MinGW.zip >nul 2>nul
+echo.
 
-:: Set PATH
-echo [INFO] Updating environment variables...
+:: 设置PATH环境变量
+echo [信息] 正在更新系统环境变量...
+echo.
 
 for /f "tokens=2,*" %%A in ('reg query HKCU\Environment /v PATH 2^>nul') do set my_user_path=%%B
 setx path "%my_user_path%;C:\VSc-cpp\MinGW\bin;%appdata%\..\Local\Programs\Microsoft VS Code\bin"
+echo [完成] 环境变量更新完成
+echo.
 
 goto main
 
-:: Environment preparation
+:: 环境准备函数
 :SetFromReg
     "%WinDir%\System32\Reg" QUERY "%~1" /v "%~2" > "%TEMP%\_envset.tmp" 2>NUL
     for /f "usebackq skip=2 tokens=2,*" %%A IN ("%TEMP%\_envset.tmp") do (
@@ -77,6 +93,7 @@ goto main
     goto :EOF
 
 :main
+    echo [信息] 正在准备系统环境...
     echo/@echo off >"%TEMP%\_env.cmd"
     call :GetRegEnv "HKLM\System\CurrentControlSet\Control\Session Manager\Environment" >> "%TEMP%\_env.cmd"
     call :GetRegEnv "HKCU\Environment" >> "%TEMP%\_env.cmd"
@@ -91,39 +108,51 @@ goto main
     del /f /q "%TEMP%\_env.cmd" 2>nul
     set "USERNAME=%OriginalUserName%"
     set "PROCESSOR_ARCHITECTURE=%OriginalArchitecture%"
+    echo [完成] 系统环境准备完成
+    echo.
 
-:: Install extensions
+:: 安装VSCode扩展
 :binstall
-echo [START] Installing VSCode extensions...
+echo [开始] 安装VSCode扩展包...
+echo.
 
 set code_bin="%appdata%\..\Local\Programs\Microsoft VS Code\bin\code"
 
-echo [EXT] Installing: Chinese Language Pack
+echo [扩展] 正在安装: 中文语言包
 start /wait /b powershell code --install-extension MS-CEINTL.vscode-language-pack-zh-hans >nul 2>nul
 echo { "locale": "zh-cn", "enable-crash-reporter": false} > %USERPROFILE%\.vscode\argv.json
 
-echo [EXT] Installing: C++ Pack
+echo [扩展] 正在安装: C++ 包
 start /wait /b powershell code --install-extension ms-vscode.cpptools-extension-pack >nul 2>nul
 start /wait /b powershell code --install-extension ms-vscode.cpptools >nul 2>nul
 
-echo [EXT] Installing: Luogu Helper
+echo [扩展] 正在安装: 洛谷助手
 start /wait /b powershell code --install-extension yltx.vscode-luogu >nul 2>nul
 
-echo [EXT] Installing: Competitive Programming Helper
+echo [扩展] 正在安装: 竞赛编程助手
 start /wait /b powershell code --install-extension DivyanshuAgrawal.competitive-programming-helper >nul 2>nul
 
-echo [EXT] Installing: CodeGeeX
+echo [扩展] 正在安装: CodeGeeX
 start /wait /b powershell code --install-extension aminer.codegeex >nul 2>nul
 
-echo [EXT] Installing: Error Lens
+echo [扩展] 正在安装: Error Lens
 start /wait /b powershell code --install-extension usernamehw.errorlens >nul 2>nul
 
-:: Final launch
+echo [完成] 所有VSCode扩展安装完成
+echo.
+
+:: 最终启动
+echo [提示] 即将启动VSCode...
+echo [信息] 请稍候...
+echo ========================================
 explorer "%appdata%\..\Local\Programs\Microsoft VS Code\code.exe"
 ping -n 10 127.0.0.1 >nul
 taskkill /f /im code.exe >nul 2>nul
-powershell "[system.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms') | Out-Null;$balloon = New-Object System.Windows.Forms.NotifyIcon;$path = Get-Process -id $pid | Select-Object -ExpandProperty Path;$icon = [System.Drawing.Icon]::ExtractAssociatedIcon($path);$balloon.Icon = $icon;$balloon.BalloonTipIcon = 'Info';$balloon.BalloonTipText = 'You can use your vscode.';$balloon.BalloonTipTitle = 'VScode-install in gsml';$balloon.Visible = $true;$balloon.ShowBalloonTip(1)"
+powershell "[system.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms') | Out-Null;$balloon = New-Object System.Windows.Forms.NotifyIcon;$path = Get-Process -id $pid | Select-Object -ExpandProperty Path;$icon = [System.Drawing.Icon]::ExtractAssociatedIcon($path);$balloon.Icon = $icon;$balloon.BalloonTipIcon = 'Info';$balloon.BalloonTipText = '你可以使用你的vscode了。';$balloon.BalloonTipTitle = 'VScode安装完成';$balloon.Visible = $true;$balloon.ShowBalloonTip(1)"
+echo ========================================
+echo [完成] 安装流程结束，请按任意键退出...
 pause
+explorer "%appdata%\..\Local\Programs\Microsoft VS Code\code.exe"
+
 exit
 
-explorer "%appdata%\..\Local\Programs\Microsoft VS Code\code.exe"
