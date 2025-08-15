@@ -1,10 +1,10 @@
-@echo off
 chcp 65001
+@echo off
 if exist "./PCL2/Plain Craft Launcher.exe" goto skip
 echo ========================================
 echo 正在下载 PCL2 启动器
 echo ========================================
-powershell -Command "Start-BitsTransfer -Source 'https://git.ppp.ac.cn/https  ://raw.githubusercontent.com/OI-liyifan202201/nbsmc-PCL2-in-GSML/refs/heads/main/nbsmc.zip' -Destination nbsmc.zip"
+powershell -Command "Start-BitsTransfer -Source 'https://git.ppp.ac.cn/https://raw.githubusercontent.com/OI-liyifan202201/nbsmc-PCL2-in-GSML/refs/heads/main/nbsmc.zip' -Destination nbsmc.zip"
 echo 下载完成！
 echo ========================================
 echo 正在解压文件
