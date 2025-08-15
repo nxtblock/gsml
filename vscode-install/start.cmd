@@ -1,5 +1,6 @@
+chcp 65001
 @echo off
-chcp 65001 >nul
+
 cls
 
 :: 清屏并显示标题
@@ -47,7 +48,7 @@ echo [开始] 正在下载 MinGW64...
 echo.
 
 :download_mingw
-powershell -Command "Invoke-WebRequest -Uri '  https://git.ppp.ac.cn/https  ://github.com/OI-liyifan202201/OI-liyifan202201/releases/download/v1.0/MinGW-64.zip' -OutFile 'MinGW.zip'"
+powershell -Command "Invoke-WebRequest -Uri '  https://git.ppp.ac.cn/https://github.com/OI-liyifan202201/OI-liyifan202201/releases/download/v1.0/MinGW-64.zip' -OutFile 'MinGW.zip'"
 if %errorlevel%==1 (
     echo [错误] MinGW下载失败，正在重试...
     goto download_mingw
