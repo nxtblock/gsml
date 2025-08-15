@@ -1,6 +1,7 @@
+chcp 65001
 @echo off
 
-chcp 65001
+
 
 if exist "./OI-Data-Bot-main/main.pyw" goto skip
 
@@ -8,7 +9,7 @@ echo ========================================
 echo 正在下载 OI-Data-Bot
 echo ========================================
 
-powershell -Command "Start-BitsTransfer -Source 'https://git.ppp.ac.cn/https  ://github.com/OI-liyifan202201/OI-Data-Bot/archive/refs/heads/main.zip' -Destination OI.zip"
+powershell -Command "Start-BitsTransfer -Source 'https://git.ppp.ac.cn/https://github.com/OI-liyifan202201/OI-Data-Bot/archive/refs/heads/main.zip' -Destination OI.zip"
 
 echo 下载完成！
 echo ========================================
