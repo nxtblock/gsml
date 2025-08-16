@@ -1,4 +1,5 @@
 chcp 65001
+
 @echo off
 if exist "./PCL2/Plain Craft Launcher.exe" goto skip
 echo ========================================
