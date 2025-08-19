@@ -1,5 +1,7 @@
 chcp 65001 
 
+@echo off
+
 echo 按任意键启用透明窗口，启用后，按下 ctrl+shift+1~ctrl+shift+9 切换透明强度
 
 if exist "./Vitrite/Vitrite-in-GSML-main/Vitrite.exe" goto skip
