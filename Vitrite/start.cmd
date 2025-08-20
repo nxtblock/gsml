@@ -21,3 +21,5 @@ start "" "./Vitrite/Vitrite-in-GSML-main/Vitrite.exe"
 echo 此透明窗口程序已在后台静默运行，按下 ctrl+shift+1~ctrl+shift+9 即可切换顶层窗口透明强度
 
 pause
+
+exit
