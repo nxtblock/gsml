@@ -13,6 +13,72 @@ echo.
 :: 创建工作目录
 md C:\VSc-cpp >nul 2>nul
 
+setlocal enabledelayedexpansion
+
+:: 获取系统用户名
+for %%a in ("%userprofile%") do set "YourUsername=%%~nxa"
+echo 正在获取系统用户名: %YourUsername%
+
+:: 检测 VS Code 是否安装
+set "vscode_installed=false"
+
+:: 方法1：检查常用安装路径
+if exist "C:\Program Files\Microsoft VS Code\code.exe" set "vscode_installed=true"
+if exist "C:\Users\%YourUsername%\AppData\Local\Programs\Microsoft VS Code\code.exe" set "vscode_installed=true"
+
+:: 方法2：检查 PATH 环境变量中是否有 code 命令
+where code >nul 2>nul && set "vscode_installed=true"
+
+
+:: 询问是否重新配置
+echo.
+choice /c  yn /n /m "检测到 VS Code，是否重新配置？(Y/N): "
+if %errorlevel% == 2 (
+    echo.
+    echo 用户取消，脚本退出。
+    pause
+    exit /b
+)
+
+echo.
+echo 用户选择重新配置，开始清理...
+
+:: 清理 .vscode 目录
+set "vscodePath=%userprofile%\.vscode"
+if exist "!vscodePath!" (
+    echo 正在检测 .vscode 文件夹
+    echo 检测到 .vscode 文件夹，开始清理
+    rmdir /s /q "!vscodePath!"
+    echo .vscode 文件夹已清理。
+) else (
+    echo 未找到 .vscode 文件夹。跳过清理
+)
+
+:: 清理 AppData/Roaming/Code 目录
+set "codePath=%userprofile%\AppData\Roaming\Code"
+if exist "!codePath!" (
+    echo 正在检测 Code 文件夹
+    echo 检测到 Code 文件夹，开始清理
+    rmdir /s /q "!codePath!"
+    echo Code 文件夹已清理。
+) else (
+    echo 未找到 Code 文件夹。跳过清理
+)
+
+echo.
+echo 清理完成
+
+:: 创建确认文件
+set "outputDir=C:\VSc-cpp"
+set "outputFile=C:\VSc-cpp\install-ok.txt"
+
+if not exist "!outputDir!" (
+    mkdir "!outputDir!"
+)
+
+echo IAKIOI >> "!outputFile!"
+echo 已写入确认信息到 !outputFile!
+
 :: VSCode安装检查
 if exist C:\VSc-cpp\install-ok.txt goto ainstall
 
@@ -152,8 +218,6 @@ explorer "%appdata%\..\Local\Programs\Microsoft VS Code\code.exe"
 ping -n 10 127.0.0.1 >nul
 
 taskkill /f /im code.exe >nul 2>nul
-
-powershell "[system.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms') | Out-Null;$balloon = New-Object System.Windows.Forms.NotifyIcon;$path = Get-Process -id $pid | Select-Object -ExpandProperty Path;$icon = [System.Drawing.Icon]::ExtractAssociatedIcon($path);$balloon.Icon = $icon;$balloon.BalloonTipIcon = 'Info';$balloon.BalloonTipText = '你可以使用你的vscode了。';$balloon.BalloonTipTitle = 'VScode安装完成';$balloon.Visible = $true;$balloon.ShowBalloonTip(1)"
 
 echo ========================================
 echo [完成] 安装流程结束，请按任意键退出...
