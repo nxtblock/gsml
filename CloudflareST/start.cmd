@@ -8,11 +8,11 @@ title [GSML]
 %1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd.exe","/c %~s0 ::","","runas",1)(window.close)&&exit
 
 
-
-
 echo 这是一个可以加速所有 Cloudflare 网站的脚本，比如说 Codeforces，Luogu 国际等等
-if exist "./cfst/cfst_hosts.bat" goto skip
+
+if exist "%~dp0\cfst\cfst_hosts.bat" goto skip
 echo ======================================= 
+
 echo 正在下载 CloudflareST 启动器
 
 echo ======================================= 
