@@ -50,8 +50,7 @@ echo 正在获取系统用户名: %YourUsername%
 REM 清理 .vscode 目录
 set "vscodePath=%userprofile%\.vscode"
 if exist "!vscodePath!" (
-echo 正在检测 .vscode 文件夹
-echo 检测到 .vscode 文件夹，开始清理
+echo 正在清理 .vscode 文件夹
 rmdir /s /q "!vscodePath!"
 echo .vscode 文件夹已清理。
 ) else (
@@ -61,8 +60,7 @@ echo 未找到 .vscode 文件夹。跳过清理
 REM 清理 AppData/Roaming/Code 目录
 set "codePath=%userprofile%\AppData\Roaming\Code"
 if exist "!codePath!" (
-echo 正在检测 Code 文件夹
-echo 检测到 Code 文件夹，开始清理
+echo 正在清理 Code 文件夹
 rmdir /s /q "!codePath!"
 echo Code 文件夹已清理。
 ) else (
@@ -207,7 +205,7 @@ start /wait /b powershell code --install-extension aminer.codegeex >nul 2>nul
 echo [扩展] 正在安装: Error Lens
 start /wait /b powershell code --install-extension usernamehw.errorlens >nul 2>nul
 
-echo [完成] 所有VSCode扩展安装完成
+echo 所有VSCode扩展安装完成
 echo.
 
 :: 最终启动
