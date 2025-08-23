@@ -146,10 +146,15 @@ echo.
 echo [提示] 即将启动VSCode...
 echo [信息] 请稍候...
 echo ========================================
+
 explorer "%appdata%\..\Local\Programs\Microsoft VS Code\code.exe"
+
 ping -n 10 127.0.0.1 >nul
+
 taskkill /f /im code.exe >nul 2>nul
+
 powershell "[system.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms') | Out-Null;$balloon = New-Object System.Windows.Forms.NotifyIcon;$path = Get-Process -id $pid | Select-Object -ExpandProperty Path;$icon = [System.Drawing.Icon]::ExtractAssociatedIcon($path);$balloon.Icon = $icon;$balloon.BalloonTipIcon = 'Info';$balloon.BalloonTipText = '你可以使用你的vscode了。';$balloon.BalloonTipTitle = 'VScode安装完成';$balloon.Visible = $true;$balloon.ShowBalloonTip(1)"
+
 echo ========================================
 echo [完成] 安装流程结束，请按任意键退出...
 pause
