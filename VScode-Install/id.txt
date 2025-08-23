@@ -1,1 +1,1 @@
-liyifan 自动配置VScode(C++)_v1
+liyifan 自动配置VScode_v1
