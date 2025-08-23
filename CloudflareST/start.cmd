@@ -5,7 +5,7 @@ chcp 65001
 title [GSML]
 
 @echo off
-%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("%~s0", "", "", "runas", 1)(window.close)&&exit
+%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd.exe","/c %~s0 ::","","runas",1)(window.close)&&exit
 
 
 
