@@ -19,16 +19,11 @@ setlocal enabledelayedexpansion
 for %%a in ("%userprofile%") do set "YourUsername=%%~nxa"
 echo 正在获取系统用户名: %YourUsername%
 
-:: 检测 VS Code 是否安装
-set "vscode_installed=false"
-
-:: 方法1：检查 PATH 环境变量中是否有 code 命令
-where code >nul 2>nul && set "vscode_installed=true"
 
 
 :: 询问是否重新配置
 echo.
-choice /c  yn /n /m "检测到 VS Code，是否重新配置？(Y/N): "
+choice /c  yn /n /m "即将安装 VS Code，是否配置（如果已安装则重新安装）？(Y/N): "
 if %errorlevel% == 2 (
     echo.
     echo 用户取消，脚本退出。
@@ -65,15 +60,7 @@ echo 未找到 Code 文件夹。跳过清理
 
 echo 清理完成
 
-set "outputDir=C:\VSc-cpp"
-set "outputFile=C:\VSc-cpp\install-ok.txt"
 
-if not exist "!outputDir!" (
-    mkdir "!outputDir!"
-)
-
-echo IAKIOI >> "!outputFile!"
-echo 已写入确认信息到 !outputFile!
 
 :: VSCode安装检查
 if exist C:\VSc-cpp\install-ok.txt goto ainstall
