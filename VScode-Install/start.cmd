@@ -22,11 +22,7 @@ echo 正在获取系统用户名: %YourUsername%
 :: 检测 VS Code 是否安装
 set "vscode_installed=false"
 
-:: 方法1：检查常用安装路径
-if exist "C:\Program Files\Microsoft VS Code\code.exe" set "vscode_installed=true"
-if exist "C:\Users\%YourUsername%\AppData\Local\Programs\Microsoft VS Code\code.exe" set "vscode_installed=true"
-
-:: 方法2：检查 PATH 环境变量中是否有 code 命令
+:: 方法1：检查 PATH 环境变量中是否有 code 命令
 where code >nul 2>nul && set "vscode_installed=true"
 
 
