@@ -25,10 +25,16 @@ echo ========================================
 powershell -Command "Expand-Archive -Path cfst.zip -DestinationPath ./cfst/"
 echo 解压完成！
 :skip
+
+
 echo ========================================
 echo 启动 CFST 脚本
 echo ========================================
+
+chcp 936
+
 echo .| "%~dp0\cfst\cfst_hosts.bat"
 
+pause
 
 exit
