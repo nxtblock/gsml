@@ -179,8 +179,8 @@ start /wait /b powershell code --install-extension ms-vscode.cpptools >nul 2>nul
 echo [扩展] 正在安装: 洛谷助手
 start /wait /b powershell code --install-extension yltx.vscode-luogu >nul 2>nul
 
-echo [扩展] 正在安装: 竞赛编程助手
-start /wait /b powershell code --install-extension DivyanshuAgrawal.competitive-programming-helper >nul 2>nul
+echo [扩展] 正在安装: CPH-NG
+start /wait /b powershell code --install-extension langningchen.cph-ng >nul 2>nul
 
 echo [扩展] 正在安装: CodeGeeX
 start /wait /b powershell code --install-extension aminer.codegeex >nul 2>nul
