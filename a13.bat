@@ -2,6 +2,8 @@
 setlocal
 chcp 65001
 
+echo 1.3->1.4 版本更新。
+
 echo [1/3] 卸载旧版本...
 if exist "..\unins000.exe" (
     "..\unins000.exe" /SILENT /NORESTART
