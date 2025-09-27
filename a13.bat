@@ -35,4 +35,6 @@ endlocal
 
 timeout /t 5
 
+start ..\\main.exe
+
 exit
