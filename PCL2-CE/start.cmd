@@ -1,21 +1,35 @@
-chcp 65001
-
 @echo off
-if exist "./PCL2/Plain Craft Launcher.exe" goto skip
+chcp 65001 >nul
+
+if exist ".\PCL2\Plain Craft Launcher.exe" goto skip
+
 echo ========================================
 echo 正在下载 PCL2 启动器
 echo ========================================
-powershell -Command "Start-BitsTransfer -Source 'http://hk1-proxy.gitwarp.com:8888/https://raw.githubusercontent.com/OI-liyifan202201/nbsmc-PCL2-in-GSML/refs/heads/main/nbsmc.zip' -Destination nbsmc.zip"
+
+:: 修正：移除 URL 末尾空格，并用引号包裹路径
+powershell -Command "Start-BitsTransfer -Source 'http://hk1-proxy.gitwarp.com:8888/https://raw.bgithub.xyz/OI-liyifan202201/nbsmc-PCL2-in-GSML/refs/heads/main/nbsmc.zip' -Destination 'nbsmc.zip'"
+
+if errorlevel 1 (
+    echo 下载失败！请检查网络或稍后重试。
+    pause
+    exit /b 1
+)
+
 echo 下载完成！
 echo ========================================
 echo 正在解压文件
 echo ========================================
-powershell -Command "Expand-Archive -Path nbsmc.zip -DestinationPath ./PCL2"
+
+powershell -Command "Expand-Archive -Path 'nbsmc.zip' -DestinationPath '.\PCL2' -Force"
+
 echo 解压完成！
 :skip
+
 echo ========================================
 echo 启动 PCL2 启动器
 echo ========================================
-start "" "./PCL2/Plain Craft Launcher.exe"
+start "" ".\PCL2\Plain Craft Launcher.exe"
+
 ping 127.0.0.1 -n 3 >nul
-exit
+exit /b
