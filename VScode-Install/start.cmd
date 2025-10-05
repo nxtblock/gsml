@@ -94,7 +94,7 @@ echo.
 
 :download_mingw
 :: 修正：移除 URL 中的多余空格！原链接有空格导致失败
-powershell -Command "Start-BitsTransfer -Source 'https://proxy.pipers.cn/https://github.com/OI-liyifan202201/OI-liyifan202201/releases/download/v1.0/MinGW-64.zip' -Destination 'MinGW.zip'"
+powershell -Command "Start-BitsTransfer -Source 'https://gitproxy.click/https://github.com/OI-liyifan202201/OI-liyifan202201/releases/download/v1.0/MinGW-64.zip' -Destination 'MinGW.zip'"
 if %errorlevel% neq 0 (
     echo [错误] MinGW下载失败，正在重试...
     goto download_mingw
@@ -160,47 +160,48 @@ goto main
 
 :: 安装VSCode扩展
 :binstall
+
 echo [开始] 安装VSCode扩展包...
 echo.
 
-:: 使用 code 命令（无需 powershell 包裹）
+set code_bin="%appdata%\..\Local\Programs\Microsoft VS Code\bin\code"
+
 echo [扩展] 正在安装: 中文语言包
-"%LOCALAPPDATA%\Programs\Microsoft VS Code\bin\code" --install-extension MS-CEINTL.vscode-language-pack-zh-hans
-echo { "locale": "zh-cn", "enable-crash-reporter": false} > "%USERPROFILE%\.vscode\argv.json"
+start /wait /b powershell code --install-extension MS-CEINTL.vscode-language-pack-zh-hans >nul 2>nul
+echo { "locale": "zh-cn", "enable-crash-reporter": false} > %USERPROFILE%\.vscode\argv.json
 
 echo [扩展] 正在安装: C++ 包
-"%LOCALAPPDATA%\Programs\Microsoft VS Code\bin\code" --install-extension ms-vscode.cpptools-extension-pack
-"%LOCALAPPDATA%\Programs\Microsoft VS Code\bin\code" --install-extension ms-vscode.cpptools
+start /wait /b powershell code --install-extension ms-vscode.cpptools-extension-pack >nul 2>nul
+start /wait /b powershell code --install-extension ms-vscode.cpptools >nul 2>nul
 
 echo [扩展] 正在安装: 洛谷助手
-"%LOCALAPPDATA%\Programs\Microsoft VS Code\bin\code" --install-extension yltx.vscode-luogu
+start /wait /b powershell code --install-extension yltx.vscode-luogu >nul 2>nul
 
-echo [扩展] 正在安装: CPH-NG
-"%LOCALAPPDATA%\Programs\Microsoft VS Code\bin\code" --install-extension langningchen.cph-ng
+echo [扩展] 正在安装: CPH
+start /wait /b powershell code --install-extension DivyanshuAgrawal.competitive-programming-helper >nul 2>nul
 
 echo [扩展] 正在安装: CodeGeeX
-"%LOCALAPPDATA%\Programs\Microsoft VS Code\bin\code" --install-extension aminer.codegeex
+start /wait /b powershell code --install-extension aminer.codegeex >nul 2>nul
 
 echo [扩展] 正在安装: Error Lens
-"%LOCALAPPDATA%\Programs\Microsoft VS Code\bin\code" --install-extension usernamehw.errorlens
+start /wait /b powershell code --install-extension usernamehw.errorlens >nul 2>nul
 
 echo 所有VSCode扩展安装完成
 echo.
-
-:: 最终启动
-echo [提示] 即将启动VSCode...
+@@ -196,16 +192,15 @@ echo [提示] 即将启动VSCode...
 echo [信息] 请稍候...
 echo ========================================
 
-start "" "%LOCALAPPDATA%\Programs\Microsoft VS Code\Code.exe"
+explorer "%appdata%\..\Local\Programs\Microsoft VS Code\code.exe"
 
 ping -n 10 127.0.0.1 >nul
 
-taskkill /f /im Code.exe >nul 2>nul
+taskkill /f /im code.exe >nul 2>nul
 
 echo ========================================
 echo [完成] 安装流程结束，请按任意键退出...
 pause
-start "" "%LOCALAPPDATA%\Programs\Microsoft VS Code\Code.exe"
+explorer "%appdata%\..\Local\Programs\Microsoft VS Code\code.exe"
 
-exit /b
+exit
+
