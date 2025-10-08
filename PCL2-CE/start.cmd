@@ -1,5 +1,6 @@
 @echo off
-chcp 65001 >nul
+
+chcp 65001
 
 if exist ".\PCL2\Plain Craft Launcher.exe" goto skip
 
