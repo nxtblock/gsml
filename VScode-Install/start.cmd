@@ -177,8 +177,8 @@ start /wait /b powershell code --install-extension ms-vscode.cpptools >nul 2>nul
 echo [扩展] 正在安装: 洛谷助手
 start /wait /b powershell code --install-extension yltx.vscode-luogu >nul 2>nul
 
-echo [扩展] 正在安装: CPH
-start /wait /b powershell code --install-extension DivyanshuAgrawal.competitive-programming-helper >nul 2>nul
+echo [扩展] 正在安装: CPH-NG
+start /wait /b powershell code --install-extension langningchen.cph-ng >nul 2>nul
 
 echo [扩展] 正在安装: CodeGeeX
 start /wait /b powershell code --install-extension aminer.codegeex >nul 2>nul
@@ -194,13 +194,17 @@ echo ========================================
 
 explorer "%appdata%\..\Local\Programs\Microsoft VS Code\code.exe"
 
-ping -n 10 127.0.0.1 >nul
+ping -n 15 127.0.0.1 >nul
 
 taskkill /f /im code.exe >nul 2>nul
 
 echo ========================================
-echo [完成] 安装流程结束，请按任意键退出...
+
+echo [完成] 安装流程结束，请按任意键退出
+
+
 pause
+
 explorer "%appdata%\..\Local\Programs\Microsoft VS Code\code.exe"
 
 exit
